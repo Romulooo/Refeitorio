@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Sistema de Refeitório</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            {% if user.role.name == 'NUTRICIONISTA' or user.role.name == 'ADMIN' %}
+            <li><a href="{{ url_for('management.list_dishes') }}">Gerenciar Pratos</a></li>
+            <li><a href="{{ url_for('management.list_menus') }}">Gerenciar Cardápios</a></li> {% endif %}
+
+            <li><a href="{{ url_for('auth.logout') }}">Sair</a></li>
+        </ul>
+    </nav>
+    <h1>Meu Dashboard</h1>
+    <p>Bem-vindo(a), {{ user.full_name }}!</p>
+
+    <hr>
+
+    <h2>Cardápio de Hoje ({{ "now"|date("d/m/Y") }})</h2>
+
+    {% if menu and menu.dishes %}
+    <ul>
+        {% for dish in menu.dishes %}
+        <li>
+            <strong>{{ dish.name }}</strong>
+            {% if dish.description %}- {{ dish.description }}{% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Nenhum cardápio cadastrado para hoje.</p>
+    {% endif %}
+
+    <hr>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('dashboard.profile') }}">Meu Perfil</a></li>
+            <li><a href="{{ url_for('dashboard.my_reservations') }}">Minhas Reservas</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">Sair</a></li>
+        </ul>
+    </nav>
+</body>
+
+</html>

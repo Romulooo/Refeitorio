@@ -1,0 +1,23 @@
+# --- Framework Principal ---
+Flask==3.0.0
+
+# --- ORM e Conexão com o Banco de Dados (PostgreSQL) ---
+# Extensão que integra o SQLAlchemy ao Flask
+Flask-SQLAlchemy==3.1.1
+# Driver moderno para conectar com o PostgreSQL (versão 3)
+# O [binary] evita a necessidade de compilar na instalação
+psycopg[binary]==3.1.18
+
+# --- Gerenciamento de Migrações do Banco de Dados ---
+# Para atualizar o schema do banco de dados de forma controlada (usa o Alembic)
+Flask-Migrate==4.0.7
+
+# --- Autenticação e Segurança ---
+# Para gerenciar sessões de usuário (login, logout)
+Flask-Login==0.6.3
+# Para fazer o hash seguro de senhas
+Flask-Bcrypt==1.0.1
+
+# --- Utilitários ---
+# Para carregar variáveis de ambiente de um arquivo .env
+python-dotenv==1.0.1

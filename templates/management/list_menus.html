@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Cardápios</title>
+</head>
+<body>
+    <h1>Gerenciamento de Cardápios</h1>
+    <a href="{{ url_for('management.add_menu') }}">Montar Novo Cardápio</a>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Tipo</th>
+                <th>Pratos</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for menu in menus %}
+            <tr>
+                <td>{{ menu.date.strftime('%d/%m/%Y') }}</td>
+                <td>{{ menu.meal_type.value }}</td>
+                <td>
+                    <ul>
+                    {% for dish in menu.dishes %}
+                        <li>{{ dish.name }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <a href="#">Editar</a> 
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Nenhum cardápio cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ url_for('dashboard.index') }}">Voltar para o Dashboard</a>
+</body>
+</html>

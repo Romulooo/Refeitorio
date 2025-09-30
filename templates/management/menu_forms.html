@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ form_title }}</title>
+</head>
+<body>
+    <h1>{{ form_title }}</h1>
+    <form method="POST">
+        <label for="date">Data:</label><br>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="meal_type">Tipo de Refeição:</label><br>
+        <select id="meal_type" name="meal_type" required>
+            {% for type in meal_types %}
+            <option value="{{ type.name }}">{{ type.value }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Selecione os Pratos:</label><br>
+        {% for dish in all_dishes %}
+        <div>
+            <input type="checkbox" id="dish_{{ dish.id }}" name="dishes" value="{{ dish.id }}">
+            <label for="dish_{{ dish.id }}">{{ dish.name }}</label>
+        </div>
+        {% else %}
+        <p>Nenhum prato cadastrado. <a href="{{ url_for('management.add_dish') }}">Cadastre um prato primeiro.</a></p>
+        {% endfor %}
+        <br>
+        <button type="submit">Salvar Cardápio</button>
+    </form>
+    <br>
+    <a href="{{ url_for('management.list_menus') }}">Cancelar</a>
+</body>
+</html>

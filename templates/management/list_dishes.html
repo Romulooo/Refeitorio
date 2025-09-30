@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Pratos</title>
+</head>
+<body>
+    <h1>Gerenciamento de Pratos</h1>
+    <a href="{{ url_for('management.add_dish') }}">Adicionar Novo Prato</a>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dish in dishes %}
+            <tr>
+                <td>{{ dish.name }}</td>
+                <td>{{ dish.description }}</td>
+                <td>
+                    <a href="{{ url_for('management.edit_dish', dish_id=dish.id) }}">Editar</a>
+                    <form action="{{ url_for('management.delete_dish', dish_id=dish.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja remover este prato?');">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Nenhum prato cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ url_for('dashboard.index') }}">Voltar para o Dashboard</a>
+</body>
+</html>
